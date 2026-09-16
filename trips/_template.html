@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip name</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<!-- Swap the body class below for "brazil-page" or "bali-page" to reuse an existing
+     accent color, or add a third color pair to style.css (copy the --brazil/--bali
+     lines in :root, and the .hero.brazil / .brazil-page rules) for a new one. -->
+<body class="brazil-page">
+
+<div class="hero brazil">
+  <span class="mark">📍</span>
+  <div class="hero-inner">
+    <a class="back" href="../index.html">&larr; All trips</a>
+    <span class="flag">📍</span>
+    <h1>Trip name</h1>
+    <div class="dates">Start date &ndash; end date &middot; Stop one, stop two</div>
+    <p class="pitch">One or two sentences on why this trip, why now.</p>
+    <div class="heroes">
+      <div><div class="num">0</div><div class="lbl">leave days, for 0 away</div></div>
+      <div><div class="num">€0</div><div class="lbl">total, both of you</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="acc open">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#9992;</span><span class="t">Flights</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="route-line"><div class="pt">XXX</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">YYY</div></div>
+      <div class="leg-meta">Date, time &middot; airline</div>
+      <div class="plainleg">Ground transport leg<span>how, how long</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#9728;</span><span class="t">Weather &amp; entry</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Fill in</span><span>fill in</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#127968;</span><span class="t">Accommodation</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Fill in</span><span>fill in</span></div>
+      <div class="kv pop"><span class="k">Total</span><span>€0</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#8364;</span><span class="t">Cost</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="cost-group">
+        <div class="cost-title">Flights</div>
+        <div class="kv"><span class="k">Fill in</span><span>€0 pp &middot; €0 both</span></div>
+        <div class="kv subtotal"><span class="k">Subtotal</span><span>€0 pp &middot; €0 both</span></div>
+      </div>
+      <div class="cost-group">
+        <div class="cost-title">Accommodation</div>
+        <div class="kv"><span class="k">Fill in</span><span>€0 pp &middot; €0 both</span></div>
+        <div class="kv subtotal"><span class="k">Subtotal</span><span>€0 pp &middot; €0 both</span></div>
+      </div>
+      <div class="kv pop total-row"><span class="k">Trip total</span><span>€0</span></div>
+      <div class="kv perperson"><span class="k">Per person</span><span>€0</span></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="tripfoot"><a href="../index.html">&larr; Back to all trips</a></div>
+
+</body>
+</html>

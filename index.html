@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Trips</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="home-wrap">
+
+  <header>
+    <h1>Our Trips</h1>
+    <p>Every trip we've planned, past and upcoming</p>
+  </header>
+
+  <div class="yearbar">
+    <div class="big" id="year-total">&ndash; / 26</div>
+    <div class="lbl">Annual leave + anniversary days planned this year</div>
+    <div class="rest" id="year-rest"></div>
+  </div>
+
+  <div class="section-label">Upcoming</div>
+  <div id="upcoming">
+    <a class="trip-link" href="trips/2027-brazil.html" data-leave="13">
+      <div class="name">🇧🇷 Brazil</div>
+      <div class="dates">13 Mar &ndash; 4 Apr 2027</div>
+      <div class="stats">13 leave days &middot; €2,949 total</div>
+    </a>
+    <a class="trip-link" href="trips/2027-bali.html" data-leave="10">
+      <div class="name">🌴 Bali</div>
+      <div class="dates">21 Jul &ndash; 4 Aug 2027</div>
+      <div class="stats">10 leave days &middot; 40,000 Avios + €844</div>
+    </a>
+  </div>
+
+  <div class="section-label" style="margin-top:30px;">Past trips</div>
+  <div id="past">
+    <div class="empty-note">Nothing archived yet. To archive a trip once it's done, cut its card out of the "Upcoming" list above and paste it in here, then add <code>archived</code> to its class. It'll drop out of the leave-day total automatically.</div>
+  </div>
+
+</div>
+<script>
+  var total = 0;
+  document.querySelectorAll('#upcoming .trip-link').forEach(function(el){
+    total += parseFloat(el.getAttribute('data-leave')) || 0;
+  });
+  document.getElementById('year-total').textContent = total + ' / 26';
+  var rest = 26 - total;
+  document.getElementById('year-rest').textContent = rest >= 0
+    ? (rest + ' days left for anything else this year')
+    : (Math.abs(rest) + ' days over budget across your planned trips');
+</script>
+</body>
+</html>
