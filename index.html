@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
-  :root{ --pink:#FF6FA5; --mint:#4CE0B3; --yellow:#FFD84D; --sky:#5DB4FF; --ink:#241C14; --muted:#8C7C68; }
+  :root{ --pink:#EA82A3; --mint:#74C7A6; --yellow:#F0C665; --sky:#7BB0DE; --ink:#241C14; --muted:#8C7C68; }
   *{box-sizing:border-box;}
   body{
     margin:0; background:#F3ECD9; background-image:radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px);
@@ -29,9 +29,9 @@
   @media (min-width:480px){ p.sub{ font-size:20px; margin-bottom:34px; } }
 
   .totalnote{
-    background:#fff; border:3px solid var(--ink); border-radius:18px; padding:18px 22px; max-width:300px;
+    background:#fff; border:2px solid var(--ink); border-radius:18px; padding:18px 22px; max-width:300px;
     margin:0 auto 40px; text-align:center; position:relative; z-index:1;
-    transform:rotate(-1.5deg); box-shadow:5px 5px 0 var(--pink);
+    transform:rotate(-1.5deg); box-shadow:4px 4px 0 var(--pink);
   }
   @media (min-width:860px){ .totalnote{ max-width:340px; padding:22px 26px; margin-bottom:50px; } }
   .tape{ position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-4deg); width:70px; height:22px;
@@ -48,12 +48,12 @@
   }
 
   .polaroid{
-    background:#fff; border:3px solid var(--ink); padding:14px 14px 16px; margin:0 auto 46px; max-width:280px;
+    background:#fff; border:2px solid var(--ink); padding:14px 14px 16px; margin:0 auto 46px; max-width:280px;
     position:relative; z-index:1; text-decoration:none; color:var(--ink); display:block;
   }
   @media (min-width:860px){ .polaroid{ margin:0 auto 14px; max-width:260px; } }
-  .polaroid:nth-child(odd){ transform:rotate(-2.5deg); box-shadow:6px 6px 0 var(--sky); }
-  .polaroid:nth-child(even){ transform:rotate(2.5deg); box-shadow:6px 6px 0 var(--yellow); }
+  .polaroid:nth-child(odd){ transform:rotate(-2.5deg); box-shadow:5px 5px 0 var(--sky); }
+  .polaroid:nth-child(even){ transform:rotate(2.5deg); box-shadow:5px 5px 0 var(--yellow); }
   .polaroid .tapecorner{ position:absolute; top:-14px; width:60px; height:24px; border:2px solid var(--ink); z-index:2; }
   .polaroid:nth-child(odd) .tapecorner{ left:-14px; background:var(--pink); transform:rotate(-38deg); }
   .polaroid:nth-child(even) .tapecorner{ right:-14px; background:var(--mint); transform:rotate(38deg); }

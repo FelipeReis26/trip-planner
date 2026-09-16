@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root{
-  --pink:#FF6FA5; --mint:#4CE0B3; --yellow:#FFD84D; --sky:#5DB4FF;
+  --pink:#EA82A3; --mint:#74C7A6; --yellow:#F0C665; --sky:#7BB0DE;
   --paper:#F3ECD9; --ink:#241C14; --muted:#8C7C68; --rule:#E4D9BF;
 }
 *{ box-sizing:border-box; }
@@ -27,7 +27,7 @@ a{ color:inherit; }
 .hero.bali::before{ background:var(--sky); }
 .hero .mark{
   position:absolute; top:18px; right:18px; z-index:3; width:52px; height:52px; border-radius:50%;
-  background:#fff; border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink);
+  background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink);
   display:flex; align-items:center; justify-content:center; font-size:22px; line-height:1;
   pointer-events:none; user-select:none;
 }
@@ -67,9 +67,9 @@ a{ color:inherit; }
 .tab-card{
   background:#fff; border:2px solid var(--ink); border-radius:14px; padding:16px 18px;
 }
-.tab-card.sky{ box-shadow:5px 5px 0 var(--sky); }
-.tab-card.mint{ box-shadow:5px 5px 0 var(--mint); }
-.tab-card.yellow{ box-shadow:5px 5px 0 var(--yellow); }
+.tab-card.sky{ box-shadow:4px 4px 0 var(--sky); }
+.tab-card.mint{ box-shadow:4px 4px 0 var(--mint); }
+.tab-card.yellow{ box-shadow:4px 4px 0 var(--yellow); }
 
 .kv{ display:flex; justify-content:space-between; gap:14px; font-size:13.5px; padding:6px 0; border-bottom:1px solid var(--rule); color:var(--ink); }
 .kv:last-child{ border-bottom:none; }
@@ -80,10 +80,10 @@ a{ color:inherit; }
 .acc{
   border:2px solid var(--ink); border-radius:14px; margin-bottom:14px; overflow:hidden; background:#fff;
 }
-.acc:nth-of-type(4n+1){ box-shadow:5px 5px 0 var(--pink); }
-.acc:nth-of-type(4n+2){ box-shadow:5px 5px 0 var(--sky); }
-.acc:nth-of-type(4n+3){ box-shadow:5px 5px 0 var(--mint); }
-.acc:nth-of-type(4n+4){ box-shadow:5px 5px 0 var(--yellow); }
+.acc:nth-of-type(4n+1){ box-shadow:4px 4px 0 var(--pink); }
+.acc:nth-of-type(4n+2){ box-shadow:4px 4px 0 var(--sky); }
+.acc:nth-of-type(4n+3){ box-shadow:4px 4px 0 var(--mint); }
+.acc:nth-of-type(4n+4){ box-shadow:4px 4px 0 var(--yellow); }
 .acc-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 @media (min-width:480px){ .acc-head{ gap:12px; padding:14px 16px; } }
 .acc-head .chip{
