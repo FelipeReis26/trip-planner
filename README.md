@@ -23,29 +23,43 @@ trips/_template.html      — copy this to start a new trip
 3. If the trip has more than one date/route option worth comparing, copy
    the `.tabrow` + extra `.tabpane` blocks from `trips/2027-brazil.html`
    and adjust the `showOpt()` script's `data-*` attributes to match.
-4. On `index.html`, copy one of the `<a class="trip-link">` cards inside
-   `<div id="upcoming">`, point its `href` at your new file, and set
-   `data-leave="X"` to that trip's leave days — the total at the top of
-   the page recalculates from that attribute automatically, nothing else
-   to update by hand.
+4. On `index.html`, copy one of the `<a class="polaroid">` cards inside
+   `<div id="trip-data">`, point its `href` at your new file, add `brazil`
+   or `bali` to its class for one of the existing two colors (or add a
+   third — see below), and set `data-leave`, `data-year`, and `data-end`
+   (the trip's return date, as `YYYY-MM-DD`). Everything else — which
+   section it shows in, the leave totals — is computed automatically
+   from those attributes.
 5. Commit and push.
 
-## Archiving a trip once it's happened
+## Archiving
 
-Cut its `<a class="trip-link">` card out of `<div id="upcoming">` and
-paste it into `<div id="past">` on `index.html`, and add `archived` to
-its class (`class="trip-link archived"`). Because the year total is
-computed only from cards inside `#upcoming`, archiving a trip removes
-it from that total automatically — there's no leave-day math to redo
-by hand. The trip's own page doesn't need to change at all.
+There's no button for this and no manual step — a trip moves itself from
+"Upcoming" to "Past trips" on its own, the moment its `data-end` date is
+behind today's date. That's checked fresh every time the page loads, so
+there's nothing to remember to do. It also means an archived trip drops
+out of that year's leave total automatically, since the total only ever
+counts what's currently showing as upcoming.
+
+A manual "archive" button was the other option, but a plain static page
+like this has nowhere to persist that click, no backend, nothing shared
+between you and your partner's browsers, so it would only ever remember
+on whichever device tapped it. Date-based beats that on every count here.
 
 ## Colors for a new trip
 
 Two accent pairs already exist: `--brazil` (green) and `--bali`
 (terracotta), each with a matching `.hero.___` / `___-page` pair in
-`style.css`. Reuse one of those for a new trip, or add a third: copy
-the `--brazil` / `--brazil-deep` lines in `:root`, and the handful of
-`.brazil-page` / `.hero.brazil` rules, renaming them for the new trip.
+`style.css`. Reuse one of those for a new trip's own page, or add a
+third: copy the `--brazil` / `--brazil-deep` lines in `:root`, and the
+handful of `.brazil-page` / `.hero.brazil` rules, renaming them for the
+new trip.
+
+`index.html` is separate from this — it's self-contained (its own
+`<style>`, not `style.css`), so its polaroid colors don't have to match
+a trip's own page. `brazil` and `bali` there currently map to mint and
+yellow. A third trip can reuse either, or take its own color by adding
+a class following the same pattern inside `index.html`'s `<style>`.
 
 ## One-time setup (if you haven't already)
 

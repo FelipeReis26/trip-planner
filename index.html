@@ -4,52 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Trips</title>
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --pink:#FF6FA5; --mint:#4CE0B3; --yellow:#FFD84D; --sky:#5DB4FF; --ink:#241C14; --muted:#8C7C68; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:#F3ECD9; background-image:radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px);
+    background-size:7px 7px; color:var(--ink); font-family:'Space Grotesk',-apple-system,sans-serif; overflow-x:hidden;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:560px; margin:0 auto; padding:46px 22px 90px; position:relative; }
+
+  .confetti{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .confetti svg{ position:absolute; }
+
+  header{ position:relative; z-index:1; text-align:center; margin-bottom:8px; }
+  h1{ font-size:38px; font-weight:700; margin:0; letter-spacing:-1px; }
+  p.sub{ font-family:'Caveat',cursive; font-weight:700; font-size:20px; color:var(--muted); margin:2px 0 34px; }
+
+  .totalnote{
+    background:#fff; border:3px solid var(--ink); border-radius:18px; padding:18px 22px; max-width:300px;
+    margin:0 auto 40px; text-align:center; position:relative; z-index:1;
+    transform:rotate(-1.5deg); box-shadow:5px 5px 0 var(--pink);
+  }
+  .tape{ position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-4deg); width:70px; height:22px;
+    background:var(--mint); border:2px solid var(--ink); z-index:2; }
+  .totalnote .num{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:28px; }
+  .totalnote .lbl{ font-family:'Caveat',cursive; font-weight:600; font-size:15px; color:var(--muted); }
+
+  .section-label{ font-family:'Caveat',cursive; font-weight:700; font-size:21px; text-align:center; margin:8px 0 20px; position:relative; z-index:1; }
+
+  .polaroid{
+    background:#fff; border:3px solid var(--ink); padding:14px 14px 16px; margin:0 auto 46px; max-width:280px;
+    position:relative; z-index:1; text-decoration:none; color:var(--ink); display:block;
+  }
+  .polaroid:nth-child(odd){ transform:rotate(-2.5deg); box-shadow:6px 6px 0 var(--sky); }
+  .polaroid:nth-child(even){ transform:rotate(2.5deg); box-shadow:6px 6px 0 var(--yellow); }
+  .polaroid .tapecorner{ position:absolute; top:-14px; width:60px; height:24px; border:2px solid var(--ink); z-index:2; }
+  .polaroid:nth-child(odd) .tapecorner{ left:-14px; background:var(--pink); transform:rotate(-38deg); }
+  .polaroid:nth-child(even) .tapecorner{ right:-14px; background:var(--mint); transform:rotate(38deg); }
+  .polaroid .photo{ width:100%; height:160px; display:flex; align-items:center; justify-content:center; font-size:54px; border:2px solid var(--ink); }
+  .polaroid.brazil .photo{ background:var(--mint); }
+  .polaroid.bali .photo{ background:var(--yellow); }
+  .polaroid .cap{ font-family:'Caveat',cursive; font-weight:700; text-align:center; font-size:26px; margin-top:12px; }
+  .polaroid .meta{ text-align:center; font-size:12px; color:var(--muted); margin-top:2px; font-family:'Space Grotesk',sans-serif; }
+  .polaroid.archived{ box-shadow:none !important; opacity:0.55; filter:grayscale(0.6); border-style:dashed; }
+
+  .empty-note{ font-family:'Caveat',cursive; font-size:16px; color:var(--muted); text-align:center; margin-bottom:24px; position:relative; z-index:1; }
+</style>
 </head>
 <body>
-<div class="home-wrap">
+<div class="wrap">
+  <div class="confetti">
+    <svg width="60" height="60" style="top:-6px; right:-16px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" style="fill:var(--sky);" opacity="0.9"/></svg>
+    <svg width="46" height="46" style="top:210px; left:-18px;" viewBox="0 0 100 100"><polygon points="50,10 90,90 10,90" style="fill:var(--pink);" opacity="0.85"/></svg>
+    <svg width="40" height="40" style="bottom:120px; right:-8px;" viewBox="0 0 100 100"><rect x="16" y="16" width="68" height="68" rx="8" style="fill:var(--yellow);" transform="rotate(15 50 50)" opacity="0.9"/></svg>
+    <svg width="34" height="34" style="bottom:20px; left:6px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" style="fill:var(--mint);" opacity="0.85"/></svg>
+  </div>
 
   <header>
     <h1>Our Trips</h1>
-    <p>Every trip we've planned, past and upcoming</p>
+    <p class="sub">the 2027 scrapbook</p>
   </header>
 
-  <div class="yearbar">
-    <div class="big" id="year-total">&ndash; / 26</div>
-    <div class="lbl">Annual leave + anniversary days planned this year</div>
-    <div class="rest" id="year-rest"></div>
+  <div class="totalnote">
+    <div class="tape"></div>
+    <div class="num" id="year-total">&ndash;/26</div>
+    <div class="lbl">leave days used &middot; <span id="year-rest"></span></div>
   </div>
 
-  <div class="section-label">Upcoming</div>
-  <div id="upcoming">
-    <a class="trip-link" href="trips/2027-brazil.html" data-leave="13">
-      <div class="name">🇧🇷 Brazil</div>
-      <div class="dates">13 Mar &ndash; 4 Apr 2027</div>
-      <div class="stats">13 leave days &middot; €2,949 total</div>
+  <!-- Every trip lives here, in date order. Nothing below is moved by hand —
+       the script sorts each one into Upcoming or Past based on data-end. -->
+  <div id="trip-data" style="display:none">
+    <a class="polaroid brazil" href="trips/2027-brazil.html" data-leave="13" data-year="2027" data-end="2027-04-04">
+      <div class="tapecorner"></div>
+      <div class="photo">🇧🇷</div><div class="cap">Brazil</div><div class="meta">13 Mar &ndash; 4 Apr &middot; 13 leave &middot; €2,949</div>
     </a>
-    <a class="trip-link" href="trips/2027-bali.html" data-leave="10">
-      <div class="name">🌴 Bali</div>
-      <div class="dates">21 Jul &ndash; 4 Aug 2027</div>
-      <div class="stats">10 leave days &middot; 40,000 Avios + €844</div>
+    <a class="polaroid bali" href="trips/2027-bali.html" data-leave="10" data-year="2027" data-end="2027-08-04">
+      <div class="tapecorner"></div>
+      <div class="photo">🌴</div><div class="cap">Bali</div><div class="meta">21 Jul &ndash; 4 Aug &middot; 10 leave &middot; 40k Avios+€844</div>
     </a>
   </div>
 
-  <div class="section-label" style="margin-top:30px;">Past trips</div>
-  <div id="past">
-    <div class="empty-note">Nothing archived yet. To archive a trip once it's done, cut its card out of the "Upcoming" list above and paste it in here, then add <code>archived</code> to its class. It'll drop out of the leave-day total automatically.</div>
-  </div>
-
+  <div class="section-label">Coming up</div>
+  <div id="upcoming"></div>
+  <div class="section-label">In the album</div>
+  <div id="past"></div>
 </div>
 <script>
+  var today = new Date(); today.setHours(0,0,0,0);
+  var upcomingEl = document.getElementById('upcoming'), pastEl = document.getElementById('past');
+  var all = Array.prototype.slice.call(document.querySelectorAll('#trip-data .polaroid'));
+  var upcoming = [], past = [];
+  all.forEach(function(el){ (new Date(el.getAttribute('data-end')) < today ? past : upcoming).push(el); });
+  if (upcoming.length) upcoming.forEach(function(el){ upcomingEl.appendChild(el); });
+  else upcomingEl.innerHTML = '<div class="empty-note">Nothing pinned up yet.</div>';
+  if (past.length) past.forEach(function(el){ el.classList.add('archived'); pastEl.appendChild(el); });
+  else pastEl.innerHTML = '<div class="empty-note">Empty page, for now — trips move here on their own once the return date has passed.</div>';
+
   var total = 0;
-  document.querySelectorAll('#upcoming .trip-link').forEach(function(el){
-    total += parseFloat(el.getAttribute('data-leave')) || 0;
-  });
-  document.getElementById('year-total').textContent = total + ' / 26';
-  var rest = 26 - total;
-  document.getElementById('year-rest').textContent = rest >= 0
-    ? (rest + ' days left for anything else this year')
-    : (Math.abs(rest) + ' days over budget across your planned trips');
+  upcoming.forEach(function(el){ total += parseFloat(el.getAttribute('data-leave'))||0; });
+  document.getElementById('year-total').textContent = total + '/26';
+  var rest = 26-total;
+  document.getElementById('year-rest').textContent = rest>=0 ? rest+' left' : (Math.abs(rest)+' over');
 </script>
 </body>
 </html>
