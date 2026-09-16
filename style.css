@@ -20,11 +20,15 @@ a{ color:inherit; }
 @media (min-width:1080px){ .hero{ padding:120px 40px 88px; } }
 .hero.brazil{ background:var(--mint); }
 .hero.bali{ background:var(--yellow); }
+.hero.pink{ background:var(--pink); }
+.hero.sky{ background:var(--sky); }
 .hero::before{
   content:''; position:absolute; top:-2px; left:50%; transform:translateX(-50%) rotate(-3deg);
   width:90px; height:26px; border:2px solid var(--ink); background:var(--pink); z-index:3;
 }
 .hero.bali::before{ background:var(--sky); }
+.hero.pink::before{ background:var(--mint); }
+.hero.sky::before{ background:var(--yellow); }
 .hero .mark{
   position:absolute; top:18px; right:18px; z-index:3; width:52px; height:52px; border-radius:50%;
   background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink);
@@ -62,6 +66,8 @@ a{ color:inherit; }
 }
 .tabrow button.on{ color:var(--ink); background:var(--mint); }
 .bali-page .tabrow button.on{ background:var(--yellow); }
+.pink-page .tabrow button.on{ background:var(--pink); }
+.sky-page .tabrow button.on{ background:var(--sky); }
 .tabpane{ display:none; } .tabpane.on{ display:block; }
 
 .tab-card{
@@ -93,6 +99,8 @@ a{ color:inherit; }
 @media (min-width:480px){ .acc-head .chip{ width:32px; height:32px; font-size:14px; } }
 .brazil-page .chip{ background:var(--mint); }
 .bali-page .chip{ background:var(--yellow); }
+.pink-page .chip{ background:var(--pink); }
+.sky-page .chip{ background:var(--sky); }
 .acc-head .t{ font-weight:700; font-size:14px; flex:1; color:var(--ink); }
 @media (min-width:480px){ .acc-head .t{ font-size:14.5px; } }
 .acc-head .chev{ transition:transform 0.25s ease; color:var(--muted); font-size:12px; }
@@ -108,7 +116,8 @@ a{ color:inherit; }
 .route-line .pt{ font-weight:700; font-size:14px; color:var(--ink); }
 .route-line .dots{ flex:1; height:1px; background:repeating-linear-gradient(to right, var(--muted) 0 4px, transparent 4px 8px); position:relative; }
 .route-line .dots .p{ position:absolute; left:50%; top:-9px; transform:translateX(-50%); background:#fff; padding:0 3px; font-size:13px; }
-.leg-meta{ font-size:12.5px; color:var(--muted); margin-bottom:16px; }
+.leg-meta{ font-size:12.5px; color:var(--muted); margin-bottom:2px; }
+.leg-price{ font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:16px; }
 .plainleg{ font-size:13.5px; margin-bottom:16px; color:var(--ink); }
 .plainleg span{ display:block; color:var(--muted); font-size:12.5px; margin-top:2px; }
 .tag{ font-size:9px; font-weight:700; color:#fff; background:var(--ink); padding:2px 7px; border-radius:3px; margin-left:6px; }

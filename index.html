@@ -61,12 +61,20 @@
   @media (min-width:480px){ .polaroid .photo{ height:160px; font-size:54px; } }
   .polaroid.brazil .photo{ background:var(--mint); }
   .polaroid.bali .photo{ background:var(--yellow); }
+  .polaroid.pink .photo{ background:var(--pink); }
+  .polaroid.sky .photo{ background:var(--sky); }
   .polaroid .cap{ font-family:'Caveat',cursive; font-weight:700; text-align:center; font-size:24px; margin-top:12px; }
   @media (min-width:480px){ .polaroid .cap{ font-size:26px; } }
   .polaroid .meta{ text-align:center; font-size:11.5px; color:var(--muted); margin-top:2px; font-family:'Space Grotesk',sans-serif; }
   .polaroid.archived{ box-shadow:none !important; opacity:0.55; filter:grayscale(0.6); border-style:dashed; }
 
   .empty-note{ font-family:'Caveat',cursive; font-size:16px; color:var(--muted); text-align:center; margin-bottom:24px; position:relative; z-index:1; grid-column:1/-1; }
+
+  .addtrip{
+    display:block; text-align:center; font-family:'Caveat',cursive; font-weight:700; font-size:20px;
+    color:var(--muted); text-decoration:none; border:2px dashed var(--muted); border-radius:14px;
+    padding:16px; margin-top:6px; position:relative; z-index:1;
+  }
 </style>
 </head>
 <body>
@@ -106,6 +114,8 @@
   <div id="upcoming"></div>
   <div class="section-label">In the album</div>
   <div id="past"></div>
+
+  <a href="add-trip.html" class="addtrip">+ Add a trip</a>
 </div>
 <script>
   var today = new Date(); today.setHours(0,0,0,0);

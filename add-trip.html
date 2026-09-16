@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add a trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --pink:#EA82A3; --mint:#74C7A6; --yellow:#F0C665; --sky:#7BB0DE; --ink:#241C14; --muted:#8C7C68; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:#F3ECD9; background-image:radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px);
+    background-size:7px 7px; color:var(--ink); font-family:'Space Grotesk',-apple-system,sans-serif;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:480px; margin:0 auto; padding:44px 22px 90px; }
+  .back{ display:inline-block; font-size:12.5px; color:var(--muted); font-weight:600; text-decoration:none; margin-bottom:20px; }
+  h1{ font-size:32px; font-weight:700; margin:0 0 4px; letter-spacing:-0.5px; }
+  p.sub{ font-family:'Caveat',cursive; font-weight:700; font-size:19px; color:var(--muted); margin:2px 0 28px; }
+
+  .card{ background:#fff; border:2px solid var(--ink); border-radius:16px; padding:22px; box-shadow:4px 4px 0 var(--pink); }
+  label{ display:block; font-size:12.5px; font-weight:700; margin:16px 0 5px; }
+  label:first-of-type{ margin-top:0; }
+  input, textarea{
+    width:100%; font-family:'Space Grotesk',sans-serif; font-size:14px; padding:9px 11px;
+    border:2px solid var(--ink); border-radius:8px; background:#fff; color:var(--ink);
+  }
+  input:focus, textarea:focus{ outline:2px solid var(--sky); outline-offset:1px; }
+  .row2{ display:flex; gap:12px; }
+  .row2 > div{ flex:1; }
+  .hint{ font-size:11.5px; color:var(--muted); margin-top:4px; }
+
+  button.submit{
+    margin-top:22px; width:100%; background:var(--mint); border:2px solid var(--ink); color:var(--ink);
+    font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; padding:13px 20px;
+    border-radius:30px; cursor:pointer; box-shadow:4px 4px 0 var(--ink);
+  }
+  button.submit:disabled{ opacity:0.6; cursor:default; }
+
+  .msg{ margin-top:16px; font-size:13px; padding:12px 14px; border-radius:10px; border:2px solid var(--ink); display:none; }
+  .msg.ok{ background:var(--mint); }
+  .msg.err{ background:var(--pink); }
+  .msg a{ text-decoration:underline; font-weight:700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; All trips</a>
+  <h1>Add a trip</h1>
+  <p class="sub">the basics now, the detail later</p>
+
+  <div class="card">
+    <form id="tripform">
+      <label for="name">Destination</label>
+      <input id="name" required placeholder="e.g. Japan">
+
+      <label for="flag">Flag or emoji</label>
+      <input id="flag" placeholder="🇯🇵" maxlength="8">
+      <div class="hint">One emoji — shows on the card and the hero.</div>
+
+      <div class="row2">
+        <div>
+          <label for="startDate">Start date</label>
+          <input id="startDate" type="date" required>
+        </div>
+        <div>
+          <label for="endDate">End date</label>
+          <input id="endDate" type="date" required>
+        </div>
+      </div>
+
+      <label for="leaveDays">Leave days used</label>
+      <input id="leaveDays" type="number" min="0" step="1" placeholder="0">
+
+      <label for="totalCost">Total cost (both of you)</label>
+      <input id="totalCost" placeholder="e.g. €2,000 or 40,000 Avios + €800">
+
+      <label for="pitch">One line on why this trip</label>
+      <textarea id="pitch" rows="2" placeholder="Why this trip, why now."></textarea>
+
+      <button class="submit" type="submit">Add this trip</button>
+    </form>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+<script>
+  document.getElementById('tripform').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = e.target.querySelector('button.submit');
+    var msg = document.getElementById('msg');
+    btn.disabled = true; btn.textContent = 'Adding\u2026';
+    msg.style.display = 'none';
+
+    var payload = {
+      name: document.getElementById('name').value,
+      flag: document.getElementById('flag').value,
+      startDate: document.getElementById('startDate').value,
+      endDate: document.getElementById('endDate').value,
+      leaveDays: document.getElementById('leaveDays').value,
+      totalCost: document.getElementById('totalCost').value,
+      pitch: document.getElementById('pitch').value
+    };
+
+    try {
+      var r = await fetch('/api/add-trip', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      var data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Something went wrong.');
+
+      msg.className = 'msg ok';
+      msg.innerHTML = '<strong>' + payload.name + '</strong> is on the site. It can take up to a minute to go live while it redeploys. <a href="trips/' + data.slug + '.html">Open it</a> or <a href="index.html">go back to all trips</a>.';
+      msg.style.display = 'block';
+      e.target.reset();
+    } catch (err) {
+      msg.className = 'msg err';
+      msg.textContent = err.message;
+      msg.style.display = 'block';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Add this trip';
+    }
+  });
+</script>
+</body>
+</html>

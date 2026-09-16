@@ -28,6 +28,10 @@
 
 <div class="page">
 
+  <!-- Add a .leg-price line under each flight's .leg-meta (see live examples).
+       Skip it for ground transport that was never separately costed.
+       If one fare covers a round trip, put the price on the outbound leg
+       only and add "(covers the return too)" rather than repeating it. -->
   <div class="acc open">
     <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
       <span class="chip">&#9992;</span><span class="t">Flights</span><span class="chev">&#9662;</span>
@@ -35,6 +39,7 @@
     <div class="acc-body"><div class="acc-body-inner">
       <div class="route-line"><div class="pt">XXX</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">YYY</div></div>
       <div class="leg-meta">Date, time &middot; airline</div>
+      <div class="leg-price">€0 pp &middot; €0 both</div>
       <div class="plainleg">Ground transport leg<span>how, how long</span></div>
     </div></div>
   </div>
