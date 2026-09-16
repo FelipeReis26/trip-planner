@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="sky-page">
+
+<div class="hero sky">
+  <span class="mark">📍</span>
+  <div class="hero-inner">
+    <a class="back" href="../index.html">&larr; All trips</a>
+    <span class="flag">📍</span>
+    <h1>Test</h1>
+    <div class="dates">25 Sept – 30 Sept 2026</div>
+    <p class="pitch">Test</p>
+    <div class="heroes">
+      <div><div class="num">5</div><div class="lbl">leave days</div></div>
+      <div><div class="num">365</div><div class="lbl">total, both of you</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Quick-added from the app with just the basics. Flesh out each
+       accordion below the same way the other trips were built —
+       ask Claude to fill these in with the real details, including
+       a .leg-price line under every flight leg. -->
+
+  <div class="acc open">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#9992;</span><span class="t">Flights</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Fill in</span><span>fill in</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#9728;</span><span class="t">Weather &amp; entry</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Fill in</span><span>fill in</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#127968;</span><span class="t">Accommodation</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Fill in</span><span>fill in</span></div>
+      <div class="kv pop"><span class="k">Total</span><span>€0</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#8364;</span><span class="t">Cost</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv pop total-row"><span class="k">Trip total</span><span>365</span></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="tripfoot"><a href="../index.html">&larr; Back to all trips</a></div>
+
+</body>
+</html>
