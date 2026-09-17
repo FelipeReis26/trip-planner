@@ -121,6 +121,41 @@ Push this folder to a GitHub repo, then on vercel.com "Add New Project",
 import that repo, Framework Preset "Other", no build command, Deploy.
 Every push to `main` after that redeploys automatically to the same URL.
 
+## Password-protecting the site
+
+Three files work together to gate the whole site behind one shared
+password: `middleware.js` (repo root) runs before any page is served
+and checks for a valid session cookie; `login.html` is the actual
+login screen, styled to match the rest of the site rather than the
+browser's plain native popup; `api/login.js` checks the password and
+sets that cookie. Anyone without it gets redirected to `/login.html`,
+and lands back on whichever page they originally asked for once
+they're in.
+
+To turn it on:
+
+1. On Vercel: this project → Settings → Environment Variables. Add
+   `SITE_PASSWORD` with whatever password you want, checked for at
+   least Production.
+2. Redeploy once (Deployments → latest → Redeploy) so it picks up the
+   new variable.
+
+The cookie holds a hash of the password, not the password itself,
+and is `HttpOnly` (JavaScript on the page can't read it) and `Secure`
+(HTTPS only). It lasts 30 days, so nobody's re-entering the password
+every visit, just occasionally.
+
+Until `SITE_PASSWORD` is set, `middleware.js` deliberately lets
+requests through unauthenticated rather than lock everyone out with
+a half-finished setup — so the site is genuinely open until you've
+done the two steps above, not protected by default.
+
+To change the password later, just update the environment variable's
+value and redeploy — everyone's existing session cookie stops
+matching automatically, no separate step needed. To remove protection
+entirely, delete `SITE_PASSWORD` from Environment Variables (or
+delete `middleware.js`) and redeploy.
+
 ## Editing with Claude
 
 This chat surface can produce new file versions but can't push to

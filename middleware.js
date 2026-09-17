@@ -1,45 +1,59 @@
 // Vercel Routing Middleware — runs before any request is served, on every
-// path. Gates the whole site behind a single shared password using HTTP
-// Basic Auth (the browser's own native login prompt, not a page you could
-// skip past by viewing source).
+// path. Redirects anyone without a valid session cookie to /login.html,
+// a proper page instead of the browser's native Basic Auth popup.
 //
-// Needs one environment variable set in the Vercel project (Settings >
-// Environment Variables): SITE_PASSWORD — the shared password.
-// See README.md "Password-protecting the site" for setup steps.
+// Needs SITE_PASSWORD set in Vercel's Environment Variables (same variable
+// as before, if you'd already set it up — this reuses it, no new setup).
+// See README.md "Password-protecting the site" for the full setup.
 
 export const config = {
   matcher: '/:path*',
 };
 
-export default function middleware(request) {
-  const expected = process.env.SITE_PASSWORD;
+// Paths that must stay reachable even when logged out, or nobody could
+// ever reach the login page (or its own assets) to log in at all.
+const PUBLIC_PATHS = [
+  '/login.html', '/api/login',
+  '/favicon.svg', '/favicon-32.png', '/favicon-16.png', '/apple-touch-icon.png',
+];
 
-  // fail safe: if the password isn't configured yet, don't lock everyone
-  // out silently — let requests through so the site still works while
-  // setup finishes, but this is a real gap, so set SITE_PASSWORD promptly.
-  if (!expected) {
+async function sha256Hex(str) {
+  const enc = new TextEncoder().encode(str);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function getCookie(request, name) {
+  const header = request.headers.get('cookie') || '';
+  for (const part of header.split(';')) {
+    const trimmed = part.trim();
+    const eq = trimmed.indexOf('=');
+    if (eq === -1) continue;
+    if (trimmed.slice(0, eq) === name) return trimmed.slice(eq + 1);
+  }
+  return null;
+}
+
+export default async function middleware(request) {
+  const url = new URL(request.url);
+
+  if (PUBLIC_PATHS.includes(url.pathname)) {
     return;
   }
 
-  const auth = request.headers.get('authorization');
-  if (auth) {
-    const [scheme, encoded] = auth.split(' ');
-    if (scheme === 'Basic' && encoded) {
-      let decoded = '';
-      try {
-        decoded = atob(encoded);
-      } catch (e) {
-        decoded = '';
-      }
-      const password = decoded.slice(decoded.indexOf(':') + 1);
-      if (password === expected) {
-        return; // correct password — let the request through
-      }
-    }
+  const expected = process.env.SITE_PASSWORD;
+  if (!expected) {
+    return; // not configured yet — fail open rather than lock everyone out silently
   }
 
-  return new Response('Password required', {
-    status: 401,
-    headers: { 'WWW-Authenticate': 'Basic realm="Tripsy"' },
-  });
+  const expectedToken = await sha256Hex(expected + ':tripsy-auth-salt');
+  const cookieToken = getCookie(request, 'tripsy_auth');
+
+  if (cookieToken === expectedToken) {
+    return; // already logged in
+  }
+
+  const loginUrl = new URL('/login.html', request.url);
+  loginUrl.searchParams.set('redirect', url.pathname + (url.search || ''));
+  return Response.redirect(loginUrl, 302);
 }
