@@ -30,12 +30,17 @@
 
   .totalnote{
     background:#fff; border:2px solid var(--ink); border-radius:18px; padding:18px 22px; max-width:300px;
-    margin:0 auto 40px; text-align:center; position:relative; z-index:1;
-    transform:rotate(-1.5deg); box-shadow:4px 4px 0 var(--pink);
+    margin:0 auto 20px; text-align:center; position:relative; z-index:1;
   }
-  @media (min-width:860px){ .totalnote{ max-width:340px; padding:22px 26px; margin-bottom:50px; } }
-  .tape{ position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-4deg); width:70px; height:22px;
-    background:var(--mint); border:2px solid var(--ink); z-index:2; }
+  .totalnote:last-of-type{ margin-bottom:40px; }
+  @media (min-width:860px){ .totalnote{ max-width:340px; padding:22px 26px; } .totalnote:last-of-type{ margin-bottom:50px; } }
+  .totalnote:nth-of-type(odd){ transform:rotate(-1.5deg); box-shadow:4px 4px 0 var(--pink); }
+  .totalnote:nth-of-type(even){ transform:rotate(1.5deg); box-shadow:4px 4px 0 var(--sky); }
+  .totalnote .tape{ position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-4deg); width:70px; height:22px;
+    border:2px solid var(--ink); z-index:2; }
+  .totalnote:nth-of-type(odd) .tape{ background:var(--mint); }
+  .totalnote:nth-of-type(even) .tape{ background:var(--yellow); }
+  .totalnote .yr{ font-family:'Caveat',cursive; font-weight:600; font-size:14px; color:var(--muted); }
   .totalnote .num{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:28px; }
   .totalnote .lbl{ font-family:'Caveat',cursive; font-weight:600; font-size:15px; color:var(--muted); }
 
@@ -91,18 +96,18 @@
 
   <header>
     <h1>Our Trips</h1>
-    <p class="sub">the 2027 scrapbook</p>
+    <p class="sub">the trip scrapbook</p>
   </header>
 
-  <div class="totalnote">
-    <div class="tape"></div>
-    <div class="num" id="year-total">&ndash;/26</div>
-    <div class="lbl">leave days used &middot; <span id="year-rest"></span></div>
-  </div>
+  <div id="year-boxes"></div>
 
   <!-- Every trip lives here, in date order. Nothing below is moved by hand —
        the script sorts each one into Upcoming or Past based on data-end. -->
   <div id="trip-data" style="display:none">
+    <a class="polaroid sky" href="trips/2026-st-louis.html" data-leave="2" data-year="2026" data-end="2026-10-31">
+      <div class="tapecorner"></div>
+      <div class="photo">🇺🇸</div><div class="cap">St. Louis</div><div class="meta">22&ndash;31 Oct &middot; 2 leave &middot; £1,132 (work)</div>
+    </a>
     <a class="polaroid pink" href="trips/2026-qatar.html" data-leave="4" data-year="2026" data-end="2026-12-01">
       <div class="tapecorner"></div>
       <div class="photo">🇶🇦</div><div class="cap">Qatar</div><div class="meta">26 Nov &ndash; 1 Dec &middot; 4 leave &middot; €4,676</div>
@@ -135,11 +140,25 @@
   if (past.length) past.forEach(function(el){ el.classList.add('archived'); pastEl.appendChild(el); });
   else pastEl.innerHTML = '<div class="empty-note">Empty page, for now — trips move here on their own once the return date has passed.</div>';
 
-  var total = 0;
-  upcoming.forEach(function(el){ total += parseFloat(el.getAttribute('data-leave'))||0; });
-  document.getElementById('year-total').textContent = total + '/26';
-  var rest = 26-total;
-  document.getElementById('year-rest').textContent = rest>=0 ? rest+' left' : (Math.abs(rest)+' over');
+  var byYear = {};
+  upcoming.forEach(function(el){
+    var y = el.getAttribute('data-year');
+    (byYear[y] = byYear[y] || []).push(parseFloat(el.getAttribute('data-leave')) || 0);
+  });
+  var boxesEl = document.getElementById('year-boxes');
+  Object.keys(byYear).sort().forEach(function(year){
+    var total = byYear[year].reduce(function(a, b){ return a + b; }, 0);
+    var rest = 26 - total;
+    var restLabel = rest >= 0 ? (rest + ' left') : (Math.abs(rest) + ' over');
+    var box = document.createElement('div');
+    box.className = 'totalnote';
+    box.innerHTML =
+      '<div class="tape"></div>' +
+      '<div class="yr">' + year + '</div>' +
+      '<div class="num">' + total + '/26</div>' +
+      '<div class="lbl">leave days used &middot; ' + restLabel + '</div>';
+    boxesEl.appendChild(box);
+  });
 </script>
 </body>
 </html>
