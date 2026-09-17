@@ -65,8 +65,8 @@
   .polaroid .tapecorner{ position:absolute; top:-14px; width:60px; height:24px; border:2px solid var(--ink); z-index:2; }
   .polaroid:nth-child(odd) .tapecorner{ left:-14px; background:var(--pink); transform:rotate(-38deg); }
   .polaroid:nth-child(even) .tapecorner{ right:-14px; background:var(--mint); transform:rotate(38deg); }
-  .polaroid .photo{ width:100%; height:150px; display:flex; align-items:center; justify-content:center; font-size:50px; border:2px solid var(--ink); }
-  @media (min-width:480px){ .polaroid .photo{ height:160px; font-size:54px; } }
+  .polaroid .photo{ width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:50px; border:2px solid var(--ink); }
+  @media (min-width:480px){ .polaroid .photo{ font-size:54px; } }
   .polaroid.brazil .photo{ background:var(--mint); }
   .polaroid.bali .photo{ background:var(--yellow); }
   .polaroid.pink .photo{ background:var(--pink); }
