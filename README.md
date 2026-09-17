@@ -1,4 +1,4 @@
-# Our Trips
+# Tripsy
 
 A static site, no build step. Each trip is its own page under `trips/`,
 and `index.html` lists them and does the leave-day math automatically.

@@ -75,7 +75,12 @@ module.exports = async function handler(req, res) {
     const safePitch = escapeHtml(pitch || 'Fill in why this trip, why now.');
     return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n' +
       '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
-      '<title>' + safeName + '</title>\n<link rel="stylesheet" href="../style.css">\n</head>\n' +
+      '<title>Tripsy \u00B7 ' + safeName + '</title>\n' +
+      '<link rel="icon" type="image/svg+xml" href="../favicon.svg">\n' +
+      '<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">\n' +
+      '<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">\n' +
+      '<link rel="apple-touch-icon" href="../apple-touch-icon.png">\n' +
+      '<link rel="stylesheet" href="../style.css">\n</head>\n' +
       '<body class="' + theme + '-page">\n\n' +
       '<div class="hero ' + theme + '">\n' +
       '  <span class="mark">' + flag + '</span>\n' +
