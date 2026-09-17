@@ -49,7 +49,7 @@
 
   #upcoming, #past{ position:relative; z-index:1; }
   @media (min-width:860px){
-    #upcoming, #past{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px 20px; align-items:start; }
+    #upcoming, #past{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px 20px; align-items:stretch; }
     /* an odd one out (last child, odd position) spans both columns but stays card-width, centered */
     #upcoming .polaroid:last-child:nth-child(odd),
     #past .polaroid:last-child:nth-child(odd){ grid-column:1 / -1; justify-self:center; }
@@ -57,7 +57,7 @@
 
   .polaroid{
     background:#fff; border:2px solid var(--ink); padding:14px 14px 16px; margin:0 auto 46px; max-width:280px;
-    position:relative; z-index:1; text-decoration:none; color:var(--ink); display:block;
+    position:relative; z-index:1; text-decoration:none; color:var(--ink); display:flex; flex-direction:column;
   }
   @media (min-width:860px){ .polaroid{ margin:0 auto 14px; max-width:260px; } }
   .polaroid:nth-child(odd){ transform:rotate(-2.5deg); box-shadow:5px 5px 0 var(--sky); }
@@ -65,7 +65,7 @@
   .polaroid .tapecorner{ position:absolute; top:-14px; width:60px; height:24px; border:2px solid var(--ink); z-index:2; }
   .polaroid:nth-child(odd) .tapecorner{ left:-14px; background:var(--pink); transform:rotate(-38deg); }
   .polaroid:nth-child(even) .tapecorner{ right:-14px; background:var(--mint); transform:rotate(38deg); }
-  .polaroid .photo{ width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:50px; border:2px solid var(--ink); }
+  .polaroid .photo{ width:100%; aspect-ratio:1/1; flex:none; display:flex; align-items:center; justify-content:center; font-size:50px; border:2px solid var(--ink); }
   @media (min-width:480px){ .polaroid .photo{ font-size:54px; } }
   .polaroid.brazil .photo{ background:var(--mint); }
   .polaroid.bali .photo{ background:var(--yellow); }

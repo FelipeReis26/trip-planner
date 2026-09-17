@@ -16,24 +16,37 @@
   a{ color:inherit; }
   .wrap{ max-width:480px; margin:0 auto; padding:44px 22px 90px; }
   .back{ display:inline-block; font-size:12.5px; color:var(--muted); font-weight:600; text-decoration:none; margin-bottom:20px; }
-  h1{ font-size:32px; font-weight:700; margin:0 0 4px; letter-spacing:-0.5px; }
-  p.sub{ font-family:'Caveat',cursive; font-weight:700; font-size:19px; color:var(--muted); margin:2px 0 28px; }
+  h1{ font-size:32px; font-weight:700; margin:0 0 4px; letter-spacing:-0.5px; text-align:center; }
+  p.sub{ font-family:'Caveat',cursive; font-weight:700; font-size:19px; color:var(--muted); margin:2px 0 34px; text-align:center; }
 
-  .card{ background:#fff; border:2px solid var(--ink); border-radius:16px; padding:22px; box-shadow:4px 4px 0 var(--pink); }
-  label{ display:block; font-size:12.5px; font-weight:700; margin:16px 0 5px; }
-  label:first-of-type{ margin-top:0; }
-  input, textarea{
-    width:100%; font-family:'Space Grotesk',sans-serif; font-size:14px; padding:9px 11px;
-    border:2px solid var(--ink); border-radius:8px; background:#fff; color:var(--ink);
+  .card{
+    background:#fff; border:2px solid var(--ink); border-radius:16px; padding:26px 22px 22px;
+    box-shadow:4px 4px 0 var(--pink); position:relative;
   }
+  .card .tape{
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:70px; height:22px; background:var(--mint); border:2px solid var(--ink); z-index:2;
+  }
+
+  /* every field group gets the exact same top spacing, no exceptions to remember */
+  .field{ margin-top:18px; }
+  .field:first-child{ margin-top:0; }
+  label{ display:block; font-size:12.5px; font-weight:700; margin-bottom:6px; }
+
+  input, textarea{
+    width:100%; min-width:0; font-family:'Space Grotesk',sans-serif; font-size:16px; padding:11px 12px;
+    border:2px solid var(--ink); border-radius:8px; background:#fff; color:var(--ink); line-height:1.3;
+  }
+  textarea{ resize:vertical; }
   input:focus, textarea:focus{ outline:2px solid var(--sky); outline-offset:1px; }
+
   .row2{ display:flex; gap:12px; }
-  .row2 > div{ flex:1; }
-  .hint{ font-size:11.5px; color:var(--muted); margin-top:4px; }
+  .row2 > div{ flex:1 1 0; min-width:0; }
+  .hint{ font-size:11.5px; color:var(--muted); margin-top:6px; }
 
   button.submit{
-    margin-top:22px; width:100%; background:var(--mint); border:2px solid var(--ink); color:var(--ink);
-    font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; padding:13px 20px;
+    margin-top:24px; width:100%; background:var(--mint); border:2px solid var(--ink); color:var(--ink);
+    font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; padding:13px 20px;
     border-radius:30px; cursor:pointer; box-shadow:4px 4px 0 var(--ink);
   }
   button.submit:disabled{ opacity:0.6; cursor:default; }
@@ -51,15 +64,20 @@
   <p class="sub">the basics now, the detail later</p>
 
   <div class="card">
+    <div class="tape"></div>
     <form id="tripform">
-      <label for="name">Destination</label>
-      <input id="name" required placeholder="e.g. Japan">
+      <div class="field">
+        <label for="name">Destination</label>
+        <input id="name" required placeholder="e.g. Japan">
+      </div>
 
-      <label for="flag">Flag or emoji</label>
-      <input id="flag" placeholder="🇯🇵" maxlength="8">
-      <div class="hint">One emoji — shows on the card and the hero.</div>
+      <div class="field">
+        <label for="flag">Flag or emoji</label>
+        <input id="flag" placeholder="🇯🇵" maxlength="8">
+        <div class="hint">One emoji &mdash; shows on the card and the hero.</div>
+      </div>
 
-      <div class="row2">
+      <div class="field row2">
         <div>
           <label for="startDate">Start date</label>
           <input id="startDate" type="date" required>
@@ -70,14 +88,20 @@
         </div>
       </div>
 
-      <label for="leaveDays">Leave days used</label>
-      <input id="leaveDays" type="number" min="0" step="1" placeholder="0">
+      <div class="field">
+        <label for="leaveDays">Leave days used</label>
+        <input id="leaveDays" type="number" min="0" step="1" placeholder="0">
+      </div>
 
-      <label for="totalCost">Total cost (both of you)</label>
-      <input id="totalCost" placeholder="e.g. €2,000 or 40,000 Avios + €800">
+      <div class="field">
+        <label for="totalCost">Total cost (both of you)</label>
+        <input id="totalCost" placeholder="e.g. €2,000 or 40,000 Avios + €800">
+      </div>
 
-      <label for="pitch">One line on why this trip</label>
-      <textarea id="pitch" rows="2" placeholder="Why this trip, why now."></textarea>
+      <div class="field">
+        <label for="pitch">One line on why this trip</label>
+        <textarea id="pitch" rows="2" placeholder="Why this trip, why now."></textarea>
+      </div>
 
       <button class="submit" type="submit">Add this trip</button>
     </form>
