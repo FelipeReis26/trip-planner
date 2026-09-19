@@ -133,21 +133,17 @@ module.exports = async function handler(req, res) {
       '</body>\n</html>\n';
   }
 
-  function buildCard({ name, flag, theme, slug, dates, endISO, leaveDays, totalCost, year }) {
+  function buildCardEntry({ name, flag, theme, slug, dates, endISO, leaveDays, totalCost, year }) {
     const safeName = escapeHtml(name);
-    const safeMeta = dates + ' &middot; ' + leaveDays + ' leave &middot; ' + escapeHtml(totalCost || '\u20AC0');
-    return '    <a class="polaroid ' + theme + '" href="trips/' + slug + '.html" data-leave="' + leaveDays + '" data-year="' + year + '" data-end="' + endISO + '">\n' +
-      '      <div class="tapecorner"></div>\n' +
-      '      <div class="photo">' + flag + '</div><div class="cap">' + safeName + '</div><div class="meta">' + safeMeta + '</div>\n' +
-      '    </a>\n';
+    const meta = dates + ' &middot; ' + leaveDays + ' leave &middot; ' + escapeHtml(totalCost || '\u20AC0');
+    return { slug, theme, flag, name: safeName, leave: leaveDays, year: String(year), end: endISO, meta };
   }
 
   try {
-    const indexFile = await gh('/contents/index.html');
-    const indexContent = Buffer.from(indexFile.content, 'base64').toString('utf-8');
+    const tripsFile = await gh('/contents/trips.json');
+    const trips = JSON.parse(Buffer.from(tripsFile.content, 'base64').toString('utf-8'));
 
-    const existingCount = (indexContent.match(/class="polaroid /g) || []).length;
-    const theme = THEMES[existingCount % THEMES.length];
+    const theme = THEMES[trips.length % THEMES.length];
 
     const year = new Date(startDate).getFullYear();
     const slug = year + '-' + slugify(name);
@@ -164,20 +160,15 @@ module.exports = async function handler(req, res) {
       })
     });
 
-    // 2) insert its card into index.html, right before #trip-data's closing tag
-    const marker = '  </div>\n\n  <div class="section-label">Coming up</div>';
-    if (!indexContent.includes(marker)) {
-      throw new Error('Could not find the trip-data insertion point in index.html — has its structure changed?');
-    }
-    const card = buildCard({ name, flag, theme, slug, dates, endISO: endDate, leaveDays, totalCost, year });
-    const updatedIndex = indexContent.replace(marker, card + marker);
+    // 2) append its entry to trips.json — index.html itself is never touched
+    trips.push(buildCardEntry({ name, flag, theme, slug, dates, endISO: endDate, leaveDays, totalCost, year }));
 
-    await gh('/contents/index.html', {
+    await gh('/contents/trips.json', {
       method: 'PUT',
       body: JSON.stringify({
-        message: 'Add ' + name + ' card to home page',
-        content: Buffer.from(updatedIndex, 'utf-8').toString('base64'),
-        sha: indexFile.sha
+        message: 'Add ' + name + ' to trips.json',
+        content: Buffer.from(JSON.stringify(trips, null, 2) + '\n', 'utf-8').toString('base64'),
+        sha: tripsFile.sha
       })
     });
 

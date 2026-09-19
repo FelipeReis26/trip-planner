@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "2026-st-louis",
+    "theme": "sky",
+    "flag": "🇺🇸",
+    "name": "St. Louis",
+    "leave": 2,
+    "year": "2026",
+    "end": "2026-10-31",
+    "meta": "22&ndash;31 Oct &middot; 2 leave &middot; £1,132 (work)"
+  },
+  {
+    "slug": "2026-qatar",
+    "theme": "pink",
+    "flag": "🇶🇦",
+    "name": "Qatar",
+    "leave": 4,
+    "year": "2026",
+    "end": "2026-12-01",
+    "meta": "26 Nov &ndash; 1 Dec &middot; 4 leave &middot; €4,676"
+  },
+  {
+    "slug": "2027-brazil",
+    "theme": "brazil",
+    "flag": "🇧🇷",
+    "name": "Brazil",
+    "leave": 13,
+    "year": "2027",
+    "end": "2027-04-04",
+    "meta": "13 Mar &ndash; 4 Apr &middot; 13 leave &middot; €2,949"
+  }
+]

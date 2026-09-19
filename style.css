@@ -133,3 +133,8 @@ p.plain{ font-size:13px; color:var(--muted); line-height:1.6; margin:4px 0 0; }
 /* per-trip footer strip */
 .tripfoot{ text-align:center; padding:34px 24px 60px; }
 .tripfoot a{ font-family:'Caveat',cursive; font-weight:700; font-size:19px; color:var(--ink); text-decoration:none; border-bottom:2px solid var(--ink); }
+.tripfoot .delete-trip{
+  display:block; margin:16px auto 0; background:none; border:none; cursor:pointer;
+  font-family:'Space Grotesk',sans-serif; font-size:12px; color:var(--muted); text-decoration:underline;
+}
+.tripfoot .delete-trip:hover{ color:var(--pink); }

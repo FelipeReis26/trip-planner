@@ -1,17 +1,23 @@
 # Tripsy
 
-A static site, no build step. Each trip is its own page under `trips/`,
-and `index.html` lists them and does the leave-day math automatically.
+A static site, no build step. Each trip is its own page under `trips/`.
+`trips.json` is the list of trips the home page reads and does the
+leave-day math from — `index.html` itself has no trip data in it at
+all, on purpose, so handing you a new `index.html` for a layout or
+style change never risks overwriting a trip added through the app.
 
 ## Structure
 
 ```
-index.html                — home page: year-at-a-glance total, upcoming trips, past trips, "+ Add a trip"
+index.html                — home page: fetches trips.json, renders cards, does the leave math
+trips.json                — the trip list itself: one entry per trip, the actual source of truth
 add-trip.html             — quick-add form; posts to api/add-trip.js
-api/add-trip.js           — serverless function: commits a new trip straight to this repo
+api/add-trip.js           — serverless function: adds a trip page + a trips.json entry
+api/delete-trip.js        — serverless function: removes a trip page + its trips.json entry
 style.css                 — shared styling for every trip page
 trips/2027-brazil.html    — Brazil, 13 Mar–4 Apr 2027
-trips/2027-bali.html      — Bali, 21 Jul–4 Aug 2027
+trips/2026-qatar.html     — Qatar, 26 Nov–1 Dec 2026
+trips/2026-st-louis.html  — St. Louis, 22–31 Oct 2026 (work trip)
 trips/_template.html      — copy this to start a new trip by hand
 ```
 
@@ -31,13 +37,15 @@ trips/_template.html      — copy this to start a new trip by hand
 3. If the trip has more than one date/route option worth comparing, copy
    the `.tabrow` + extra `.tabpane` blocks from `trips/2027-brazil.html`
    and adjust the `showOpt()` script's `data-*` attributes to match.
-4. On `index.html`, copy one of the `<a class="polaroid">` cards inside
-   `<div id="trip-data">`, point its `href` at your new file, add `brazil`
-   or `bali` to its class for one of the existing two colors (or add a
-   third — see below), and set `data-leave`, `data-year`, and `data-end`
-   (the trip's return date, as `YYYY-MM-DD`). Everything else — which
-   section it shows in, the leave totals — is computed automatically
-   from those attributes.
+4. Add an entry to `trips.json` — copy one of the existing objects in
+   the array and adjust it: `slug` (matching your new filename, no
+   `.html`), `theme` (`brazil`, `bali`, `pink`, or `sky` — see below),
+   `flag`, `name`, `leave` (a number), `year`, `end` (the trip's return
+   date, `YYYY-MM-DD`), and `meta` (the one-line summary shown on the
+   card). Where it sits in the array decides display order among
+   trips in the same section — everything else (which section it
+   shows in, the leave totals) is computed automatically from `year`
+   and `end`. `index.html` itself doesn't need touching for this.
 5. Commit and push.
 
 ## Adding a trip from the app
@@ -46,11 +54,11 @@ trips/_template.html      — copy this to start a new trip by hand
 page) is the quicker path — destination, dates, leave days, total
 cost, one line on why. Submitting it calls `api/add-trip.js`, a small
 serverless function that runs on Vercel, not in the browser, which
-commits a new file under `trips/` and adds its card to `index.html`
-directly in the GitHub repo. That commit triggers the same auto-deploy
-as pushing by hand, so within roughly a minute the new trip is live
-for anyone on any device, nothing is stored locally to just one
-browser.
+commits a new file under `trips/` and appends its entry to
+`trips.json` — two separate commits, straight to the GitHub repo,
+`index.html` is never touched. That triggers the same auto-deploy as
+pushing by hand, so within roughly a minute the new trip is live for
+anyone on any device, nothing is stored locally to just one browser.
 
 It picks a color automatically, cycling through the four themes
 below, and it only captures the basics. The Flights, Weather & entry,
@@ -80,6 +88,23 @@ variable; it's never sent to the browser, so it isn't visible in the
 page source or dev tools the way anything in `index.html` or
 `style.css` would be.
 
+## Deleting a trip
+
+Every trip page has a small "Delete this trip" link at the bottom,
+under the back link. It confirms once, then calls `api/delete-trip.js`
+— the same kind of function as adding a trip, just the reverse: it
+deletes `trips/{slug}.html` and removes that trip's entry from
+`trips.json`, in one commit each. `index.html` is never touched here
+either. Same redeploy delay as adding one, up to a minute before it's
+gone from the home page too.
+
+This uses the same `GITHUB_TOKEN` / `GITHUB_REPO` environment
+variables as adding a trip — no separate setup needed if that's
+already configured.
+
+Building a trip by hand from `_template.html`? It already has the
+button wired up, just update the slug and name in it to match.
+
 ## Archiving
 
 There's no button for this and no manual step — a trip moves itself from
@@ -100,9 +125,10 @@ Four themes exist now: `brazil` (mint), `bali` (yellow), `pink`, and
 `sky`, each with a matching `.hero.___` and `___-page` set of rules in
 `style.css` (hero background, tab-active color, chip color). Adding a
 trip from the app cycles through these four automatically based on
-how many trip cards already exist, so you don't have to choose. Adding
-one by hand, just pick any of the four and use its name as both the
-hero class and the body class.
+how many entries `trips.json` already has, so you don't have to
+choose. Adding one by hand, just pick any of the four and use its
+name as both the hero class, the body class, and the `theme` value
+in its `trips.json` entry.
 
 A fifth trip added by hand can reuse any of the four, or take its own
 color: add a `--name` variable in `style.css`'s `:root`, then copy the
@@ -113,7 +139,8 @@ if you want the app's auto-rotation to include it.
 `index.html` is separate from this — it's self-contained (its own
 `<style>`, not `style.css`) — so it has its own matching set of
 `.polaroid.brazil` / `.polaroid.bali` / `.polaroid.pink` /
-`.polaroid.sky` rules for the photo color on each card.
+`.polaroid.sky` rules for the photo color on each card, keyed off
+each entry's `theme` value in `trips.json`.
 
 ## One-time setup (if you haven't already)
 

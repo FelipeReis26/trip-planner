@@ -89,7 +89,26 @@
 
 </div>
 
-<div class="tripfoot"><a href="../index.html">&larr; Back to all trips</a></div>
+<div class="tripfoot">
+  <a href="../index.html">&larr; Back to all trips</a>
+  <button class="delete-trip" onclick="deleteTrip('2026-qatar', 'Qatar')">Delete this trip</button>
+</div>
 
+<script>
+function deleteTrip(slug, name){
+  if (!confirm('Delete ' + name + '? This removes the page and its card on the home page. Can\'t be undone from here.')) return;
+  fetch('/api/delete-trip', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug: slug })
+  }).then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+    .then(function(result){
+      if (!result.ok) { alert(result.data.error || 'Something went wrong.'); return; }
+      alert(name + " deleted. It can take up to a minute to disappear from the home page while it redeploys.");
+      window.location.href = '../index.html';
+    })
+    .catch(function(err){ alert('Something went wrong: ' + err.message); });
+}
+</script>
 </body>
 </html>
