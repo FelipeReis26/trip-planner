@@ -18,139 +18,93 @@
     <a class="back" href="../index.html">&larr; All trips</a>
     <span class="flag">🇧🇷</span>
     <h1>Brazil</h1>
-    <div class="dates">13 Mar &ndash; 4 Apr 2027 &middot; Fortaleza, Rio, Teresópolis, Búzios</div>
-    <p class="pitch">Family time in Fortaleza, the city in Rio, the mountains at Teresópolis, the coast at Búzios &mdash; one loop, four registers, and both bank holidays on the way.</p>
+    <div class="dates">3&ndash;26 Mar 2027 &middot; Fortaleza, Rio, Teresópolis</div>
+    <p class="pitch">Family time in Fortaleza, the city in Rio, then Teresópolis with an open stretch in the middle still up for grabs.</p>
     <div class="heroes">
-      <div><div class="num" id="hero-leave">13</div><div class="lbl">leave days, for <span id="hero-days">23</span> away</div></div>
-      <div><div class="num" id="hero-total">€2,949</div><div class="lbl">total, both of you</div></div>
+      <div><div class="num">17</div><div class="lbl">leave days, for 24 away</div></div>
+      <div><div class="num">€1,984+</div><div class="lbl">so far, both of you</div></div>
     </div>
   </div>
 </div>
 
 <div class="page">
-  <div class="tabrow" id="brazil-tabs">
-    <button class="on" data-leave="13" data-away="23" data-flights="2134" data-accom="815" data-total="€2,949" onclick="showOpt('cur',this)">Current plan</button>
-    <button data-leave="23" data-away="31" data-flights="2552.54" data-accom="0" data-total="€2,552.54" onclick="showOpt('o1',this)">Option 1</button>
-    <button data-leave="19" data-away="28" data-flights="1881.28" data-accom="0" data-total="€1,881.28" onclick="showOpt('o2',this)">Option 2</button>
-    <button data-leave="20" data-away="28" data-flights="3032.90" data-accom="0" data-total="€3,032.90+" onclick="showOpt('o3',this)">Option 3</button>
+
+  <div class="acc open">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#9992;</span><span class="t">Flights</span><span class="chev">&#9662;</span>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="route-line"><div class="pt">DUB</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">MAD</div></div>
+      <div class="leg-meta">Wed 3 Mar, 10:00&ndash;13:40 &middot; Iberia Express IB1882 &middot; T2&rarr;T4S</div>
+      <div class="route-line"><div class="pt">MAD</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">FOR</div></div>
+      <div class="leg-meta">Wed 3 Mar, 17:05&ndash;21:55 &middot; Iberia IB0167</div>
+      <div class="leg-price">€342.10 pp &middot; €684.20 both (covers both legs)</div>
+      <p class="plain">Booking code KYRV4, class AON4ZOM6, 1 checked bag each.</p>
+      <p class="plain"><strong>Return flight not booked yet.</strong> Trip currently ends 26 Mar with the last hotel checkout &mdash; add the flight home once it's sorted.</p>
+    </div></div>
   </div>
 
-  <div class="tabpane on" id="opt-cur">
-
-    <div class="acc open">
-      <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <span class="chip">&#9992;</span><span class="t">Flights</span><span class="chev">&#9662;</span>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner">
-        <div class="route-line"><div class="pt">DUB</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">FOR</div></div>
-        <div class="leg-meta">Sat 13 Mar, 06:50&ndash;20:45 &middot; via Brussels &amp; Madrid &middot; Aer Lingus / Iberia</div>
-        <div class="leg-price">€371 pp &middot; €742 both</div>
-        <div class="route-line"><div class="pt">FOR</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">GIG</div></div>
-        <div class="leg-meta">Wed 17 Mar, 14:10&ndash;17:30 &middot; direct &middot; LATAM</div>
-        <div class="leg-price">€128 pp &middot; €256 both</div>
-        <div class="plainleg">Rio &rarr; Teresópolis<span>by road, about 1.5 hours</span></div>
-        <div class="plainleg">Teresópolis &rarr; Búzios<span>by road, about 3 hours</span></div>
-        <div class="route-line"><div class="pt">GIG</div><div class="dots"><span class="p">&#9992;</span></div><div class="pt">DUB</div></div>
-        <div class="leg-meta">Sun 4 Apr, 16:45&ndash;12:05 (+1) &middot; via London &middot; British Airways</div>
-        <div class="leg-price">€568 pp &middot; €1,136 both</div>
-      </div></div>
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#9728;</span><span class="t">Weather &amp; entry</span><span class="chev">&#9662;</span>
     </div>
-
-    <div class="acc">
-      <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <span class="chip">&#9728;</span><span class="t">Weather &amp; entry</span><span class="chev">&#9662;</span>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner">
-        <div class="kv"><span class="k">Fortaleza</span><span>~30°C, rainy season</span></div>
-        <div class="kv"><span class="k">Rio</span><span>29&ndash;31°C, some rain</span></div>
-        <div class="kv"><span class="k">Teresópolis</span><span>25&ndash;26°C, cooler</span></div>
-        <div class="kv"><span class="k">Entry</span><span>Visa free, 90 days</span></div>
-      </div></div>
-    </div>
-
-    <div class="acc">
-      <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <span class="chip">&#128737;</span><span class="t">Safety</span><span class="chev">&#9662;</span>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner">
-        <p class="plain">Zona Sul in Rio, Teresópolis, and Búzios are all well-touristed. In Rio: stay in Zona Sul, use Uber after dark, keep your phone out of sight on the beach.</p>
-      </div></div>
-    </div>
-
-    <div class="acc">
-      <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <span class="chip">&#127968;</span><span class="t">Accommodation</span><span class="chev">&#9662;</span>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner">
-        <div class="kv"><span class="k">Fortaleza, 4 nights</span><span>€0, family home</span></div>
-        <div class="kv"><span class="k">Rio city, 4 nights</span><span>~€300</span></div>
-        <div class="kv"><span class="k">Teresópolis, 5 nights</span><span>~€155</span></div>
-        <div class="kv"><span class="k">Búzios, 9 nights</span><span>~€360</span></div>
-        <div class="kv pop"><span class="k">Total</span><span>€815</span></div>
-      </div></div>
-    </div>
-
-    <div class="acc">
-      <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <span class="chip">&#8364;</span><span class="t">Cost</span><span class="chev">&#9662;</span>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner">
-        <div class="cost-group">
-          <div class="cost-title">Flights</div>
-          <div class="kv"><span class="k">Dublin &rarr; Fortaleza</span><span>€371 pp &middot; €742 both</span></div>
-          <div class="kv"><span class="k">Fortaleza &rarr; Rio</span><span>€128 pp &middot; €256 both</span></div>
-          <div class="kv"><span class="k">Rio &rarr; Dublin</span><span>€568 pp &middot; €1,136 both</span></div>
-          <div class="kv subtotal"><span class="k">Subtotal</span><span>€1,067 pp &middot; €2,134 both</span></div>
-        </div>
-        <div class="cost-group">
-          <div class="cost-title">Accommodation</div>
-          <div class="kv"><span class="k">Fortaleza, 4 nights</span><span>€0 pp &middot; €0 both</span></div>
-          <div class="kv"><span class="k">Rio city, 4 nights</span><span>€150 pp &middot; €300 both</span></div>
-          <div class="kv"><span class="k">Teresópolis, 5 nights</span><span>€77.50 pp &middot; €155 both</span></div>
-          <div class="kv"><span class="k">Búzios, 9 nights</span><span>€180 pp &middot; €360 both</span></div>
-          <div class="kv subtotal"><span class="k">Subtotal</span><span>€407.50 pp &middot; €815 both</span></div>
-        </div>
-        <div class="kv pop total-row"><span class="k">Trip total</span><span>€2,949</span></div>
-        <div class="kv perperson"><span class="k">Per person</span><span>€1,474.50</span></div>
-      </div></div>
-    </div>
-
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Fortaleza</span><span>~30°C, rainy season</span></div>
+      <div class="kv"><span class="k">Rio</span><span>29&ndash;31°C, some rain</span></div>
+      <div class="kv"><span class="k">Teresópolis</span><span>25&ndash;26°C, cooler</span></div>
+      <div class="kv"><span class="k">Entry</span><span>Visa free, 90 days</span></div>
+    </div></div>
   </div>
 
-  <div class="tabpane" id="opt-o1">
-    <div class="tab-card sky">
-      <div class="note" style="font-style:italic; margin-bottom:14px;">Priced a while back &mdash; worth rechecking before booking.</div>
-      <div class="kv"><span class="k">Dates</span><span>Tue 30 Mar &rarr; Thu 29 Apr</span></div>
-      <div class="kv"><span class="k">Dublin &rarr; Fortaleza</span><span>€872.20 (€436.10pp)</span></div>
-      <div class="kv"><span class="k">Fortaleza &rarr; Rio</span><span>€298.76 (~€150pp)</span></div>
-      <div class="kv"><span class="k">Rio &rarr; Dublin</span><span>€1,380.34 (€690.17pp)</span></div>
-      <div class="kv pop"><span class="k">Flights, both of you</span><span>€2,552.54</span></div>
-      <div class="note">Accommodation not costed for this option. 31 days away, 23 leave days &mdash; misses St Patrick's Day and Easter Monday entirely.</div>
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#128737;</span><span class="t">Safety</span><span class="chev">&#9662;</span>
     </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <p class="plain">Zona Sul in Rio and Teresópolis are both well-touristed. In Rio: stay in Zona Sul, use Uber after dark, keep your phone out of sight on the beach.</p>
+    </div></div>
   </div>
 
-  <div class="tabpane" id="opt-o2">
-    <div class="tab-card mint">
-      <div class="note" style="font-style:italic; margin-bottom:14px;">Priced a while back &mdash; worth rechecking before booking.</div>
-      <div class="kv"><span class="k">Dates</span><span>Mon 29 Mar &rarr; Sun 25 Apr</span></div>
-      <div class="kv"><span class="k">Dublin &harr; Rio, return</span><span>€1,619.32 (€809.66pp)</span></div>
-      <div class="kv"><span class="k">Rio &harr; Fortaleza, return</span><span>€261.97 (€130.98pp)</span></div>
-      <div class="kv pop"><span class="k">Flights, both of you</span><span>€1,881.28</span></div>
-      <div class="note">Cheapest flights of the four, about €253 less than the current plan. But 28 days away needs 19 leave days, six more than the current plan, and the domestic hop only includes a 12kg bag.</div>
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#127968;</span><span class="t">Accommodation</span><span class="chev">&#9662;</span>
     </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="kv"><span class="k">Hotel Luzeiros, Fortaleza &middot; 3&ndash;7 Mar</span><span>€414</span></div>
+      <div class="kv"><span class="k">Hotel Astoria Palace, Rio &middot; 7&ndash;11 Mar</span><span>€497</span></div>
+      <div class="kv"><span class="k">Intercity Teresópolis &middot; 11&ndash;15 Mar</span><span>€274</span></div>
+      <div class="kv"><span class="k">Intercity Teresópolis &middot; 24&ndash;26 Mar</span><span>€115</span></div>
+      <div class="kv pop"><span class="k">Confirmed so far</span><span>€1,300</span></div>
+      <p class="plain"><strong>15&ndash;24 Mar (9 nights) not decided yet</strong> &mdash; could be one base or split across two or three places.</p>
+      <p class="plain">Rental car planned for 12&ndash;25 Mar (13 days), not booked yet &mdash; covers the back half of the first Teresópolis stay, the whole open stretch, and most of the second one.</p>
+    </div></div>
   </div>
 
-  <div class="tabpane" id="opt-o3">
-    <div class="tab-card yellow">
-      <div class="note" style="font-style:italic; margin-bottom:14px;">Priced a while back &mdash; one leg still unpriced.</div>
-      <div class="kv"><span class="k">Dates</span><span>Mon 5 Apr &rarr; Sun 2 May</span></div>
-      <div class="kv"><span class="k">Dublin &rarr; Rio</span><span>€1,570.20 (€785.10pp)</span></div>
-      <div class="kv"><span class="k">Rio &rarr; Fortaleza</span><span>TBC</span></div>
-      <div class="kv"><span class="k">Fortaleza &rarr; Dublin</span><span>€1,462.70 (€731.35pp)</span></div>
-      <div class="kv pop"><span class="k">Flights, both of you</span><span>€3,032.90+</span></div>
-      <div class="note">Weakest option: most expensive, still missing a price, 28 days away needs 20 leave days, and misses May Day by a single day.</div>
+  <div class="acc">
+    <div class="acc-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="chip">&#8364;</span><span class="t">Cost</span><span class="chev">&#9662;</span>
     </div>
+    <div class="acc-body"><div class="acc-body-inner">
+      <div class="cost-group">
+        <div class="cost-title">Flights</div>
+        <div class="kv"><span class="k">Dublin &rarr; Fortaleza, via Madrid</span><span>€342.10 pp &middot; €684.20 both</span></div>
+        <div class="kv"><span class="k">Return flight</span><span>not booked</span></div>
+      </div>
+      <div class="cost-group">
+        <div class="cost-title">Accommodation</div>
+        <div class="kv"><span class="k">Fortaleza, 4 nights</span><span>€207 pp &middot; €414 both</span></div>
+        <div class="kv"><span class="k">Rio, 4 nights</span><span>€248.50 pp &middot; €497 both</span></div>
+        <div class="kv"><span class="k">Teresópolis, 4 nights</span><span>€137 pp &middot; €274 both</span></div>
+        <div class="kv"><span class="k">Teresópolis, 2 nights (return)</span><span>€57.50 pp &middot; €115 both</span></div>
+        <div class="kv"><span class="k">15&ndash;24 Mar, 9 nights</span><span>not decided</span></div>
+        <div class="kv subtotal"><span class="k">Subtotal, confirmed</span><span>€650 pp &middot; €1,300 both</span></div>
+      </div>
+      <div class="kv pop total-row"><span class="k">Confirmed so far</span><span>€1,984.20</span></div>
+      <div class="kv perperson"><span class="k">Per person, so far</span><span>€992.10</span></div>
+      <p class="plain">Still to add: the return flight and the open 9 nights. This total will grow.</p>
+    </div></div>
   </div>
+
 </div>
 
 <div class="tripfoot">
@@ -159,17 +113,6 @@
 </div>
 
 <script>
-function showOpt(name, btn){
-  document.querySelectorAll('#opt-cur, #opt-o1, #opt-o2, #opt-o3').forEach(function(p){ p.classList.remove('on'); });
-  document.getElementById('opt-' + name).classList.add('on');
-  btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
-  btn.classList.add('on');
-
-  document.getElementById('hero-leave').textContent = btn.getAttribute('data-leave');
-  document.getElementById('hero-days').textContent = btn.getAttribute('data-away');
-  document.getElementById('hero-total').textContent = btn.getAttribute('data-total');
-}
-
 function deleteTrip(slug, name){
   if (!confirm('Delete ' + name + '? This removes the page and its card on the home page. Can\'t be undone from here.')) return;
   fetch('/api/delete-trip', {
